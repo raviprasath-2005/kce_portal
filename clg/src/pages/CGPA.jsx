@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import SubjectRow from "../components/SubjectRow";
 import ResultCard from "../components/ResultCard";
-
+import { FaArrowLeft } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 export default function CGPA() {
+    const navigate = useNavigate();
   const [subjects, setSubjects] = useState(() => {
     const saved = localStorage.getItem("subjects");
 
@@ -99,11 +101,15 @@ export default function CGPA() {
   <div className="flex flex-1 justify-center items-center p-5">
     
     <div className="bg-white shadow-xl rounded-3xl p-6 sm:p-8 w-full max-w-3xl">
+      <div className="flex gap-5 items-center sm:gap-15 md:gap-15 mb-6">
+  <span   onClick={() => navigate("/")} className="cursor-pointer w-10 h-10 p-3 flex items-center rounded-4xl justify-center cursor-pointer bg-amber-600 hover:bg-amber-700">
+    <FaArrowLeft className="text-xl text-white" />
+  </span>
 
-      <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-amber-600">
-        Cumulative Grade Point Average Calculator
-      </h1>
-
+  <h1 className="text-xl sm:text-2xl font-bold text-amber-600">
+    Cumulative Grade Point Average Calculator
+  </h1>
+</div>
       {subjects.map((subject, index) => (
         <SubjectRow
           key={index}
