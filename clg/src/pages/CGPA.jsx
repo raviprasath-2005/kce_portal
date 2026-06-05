@@ -3,7 +3,17 @@ import SubjectRow from "../components/SubjectRow";
 import ResultCard from "../components/ResultCard";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 export default function CGPA() {
+  const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setLoading(false);
+  }, 1000);
+
+  return () => clearTimeout(timer);
+}, []);
     const navigate = useNavigate();
   const [subjects, setSubjects] = useState(() => {
     const saved = localStorage.getItem("subjects");
@@ -85,7 +95,9 @@ export default function CGPA() {
       },
     ]);
   };
-
+if (loading) {
+  return <Loader />;
+}
   return (
     <>
     <div className="min-h-screen flex flex-col bg-slate-50">
